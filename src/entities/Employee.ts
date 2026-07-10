@@ -8,6 +8,9 @@ import {
   Check,
 } from "typeorm";
 
+import { OneToMany } from "typeorm";
+import { EmployeeDocuments } from "./EmployeeDocuments";
+
 @Entity({ name: "employeesDetails" })
 @Check(`"age" > 18`)
 @Check(`"salary" >= 0`)
@@ -61,6 +64,13 @@ export class EmployeesDetails {
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt!: Date;
+
+
+//==================one to many relation with EmployeeDocuments=========================
+
+  @OneToMany(() => EmployeeDocuments, (doc) => doc.employee) 
+  documents!: EmployeeDocuments[];
+  
 }
 
 export default EmployeesDetails;

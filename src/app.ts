@@ -2,6 +2,10 @@ import express, { Application,Request,Response } from "express";
 import cors from "cors";
 import { AppDataSource } from "./config/dataSource";
 
+import { upload } from "./config/multerConfig";
+import { uploadEmployeeDocument, getEmployeeDocuments } from "./controllers/employeeDocumentController";
+
+
 import router from "./routes/employeeRoutes";
 
 const app: Application = express();
@@ -31,6 +35,7 @@ app.get("/health", async (_req: Request, res: Response) => {
 
 // --- Routes ---
 app.use("/api/employees", router);
+app.use("api/employeesDocuments",router)
 
 
 //app.use("/emp",router);
